@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DiCA · 基于分布的聚类分析平台</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-logo">
+          <img src="img/logo-butterfly.png" alt="DiCA" />
+        </span>
+        <span><span class="brand-name">DiCA</span></span>
+        <span class="brand-sub">Distribution-based<br>Clustering Analysis</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html" class="active">首页</a>
+        <a href="kskc.html">KSKC</a>
+        <a href="wsc.html">WSC</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-copy">
+      <span class="tag">Distribution-based Clustering</span>
+      <h1>从交易流水到行为分群</h1>
+      <p>DiCA 是一个<b>基于分布差异</b>的聚类分析平台。它不依赖人工构造的特征，而是把每个对象（商户 / 用户）的大量重复观测记录提炼为<b>经验分布</b>，再依据分布之间的差异将对象聚成若干行为相似的簇，从而在数据层面还原出不同的消费行为模式。</p>
+      <ul class="hero-points">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>不依赖人工特征，直接利用观测值的分布信息，避免信息损失</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>以分布间的统计距离度量差异，聚类结果可解释、有理论支撑</span>
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          <span>纯前端运行，数据不离开浏览器，上传 CSV 即可完成聚类</span>
+        </li>
+      </ul>
+    </div>
+    <div class="hero-art">
+      <img src="img/concept-3d.png" alt="从交易流水到经验分布再到行为分群" />
+    </div>
+  </div>
+
+  <div class="wrap" style="padding-top:24px;">
+    <div class="card-head" style="margin-bottom:16px;">
+      <span class="step">算法</span>
+      <h2>选择聚类算法</h2>
+    </div>
+    <p class="hint">DiCA 内置两种基于分布差异的聚类算法，均适用于「对象 + 重复观测记录」的数据结构。算法在浏览器本地执行，无需安装、无需服务器。</p>
+
+    <div class="algo-cards" style="margin:0; padding:0;">
+      <a class="algo-card" href="kskc.html">
+        <div class="algo-head">
+          <div class="algo-badge">KSKC</div>
+          <div>
+            <h3>KS 距离 K-means</h3>
+            <div class="algo-en">Kolmogorov–Smirnov K-means Clustering</div>
+          </div>
+        </div>
+        <p>用两样本 Kolmogorov–Smirnov 距离度量对象经验分布之间的差异，在 K-means 框架下迭代划分。适合对分布整体形态差异敏感的场景。</p>
+        <div class="algo-meta">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            分布整体差异
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            迭代式
+          </span>
+        </div>
+        <span class="algo-cta">
+          进入 KSKC 应用
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+
+      <a class="algo-card" href="wsc.html">
+        <div class="algo-head">
+          <div class="algo-badge">WSC</div>
+          <div>
+            <h3>Wasserstein 谱聚类</h3>
+            <div class="algo-en">Wasserstein-distance-based Spectral Clustering</div>
+          </div>
+        </div>
+        <p>用一维 Wasserstein 距离度量分布差异并构造相似度矩阵，经稀疏化后以谱聚类划分对象。将聚类转化为图割问题，善于捕捉局部分布结构。</p>
+        <div class="algo-meta">
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            图割视角
+          </span>
+          <span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            谱方法
+          </span>
+        </div>
+        <span class="algo-cta">
+          进入 WSC 应用
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+        </span>
+      </a>
+    </div>
+
+    <div class="ref-card">
+      <h3>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        参考文献
+      </h3>
+      <div class="ref-item">
+        <span class="ref-no">[1]</span>
+        <span>Zhu, Y., Deng, Q., Huang, D., Jing, B., &amp; Zhang, B. (2021). <span class="ref-title">Clustering based on Kolmogorov–Smirnov statistic with application to bank card transaction data.</span> <span class="ref-journal">Journal of the Royal Statistical Society Series C: Applied Statistics</span>, 70(3), 558–578. <a href="https://doi.org/10.1111/rssc.12471" target="_blank" rel="noopener">https://doi.org/10.1111/rssc.12471</a></span>
+      </div>
+      <div class="ref-item">
+        <span class="ref-no">[2]</span>
+        <span>Zhu, Y., Huang, D., &amp; Zhang, B. (2025). <span class="ref-title">A Wasserstein distance-based spectral clustering method for transaction data analysis.</span> <span class="ref-journal">Expert Systems with Applications</span>, 260, 125418. <a href="https://doi.org/10.1016/j.eswa.2024.125418" target="_blank" rel="noopener">https://doi.org/10.1016/j.eswa.2024.125418</a></span>
+      </div>
+    </div>
+
+    <footer>DiCA · 基于分布的聚类分析平台</footer>
+  </div>
+</body>
+</html>
