@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# 运行时产生的上传数据与结果
+uploads/
+
+# 原 KSKC 仓库参考副本（不提交，算法来源见 README；含嵌套 .git）
+repo/
+
+# 工作区内部记忆（不对外发布）
+.workbuddy/
+
+# 临时与系统文件
+*.log
+.DS_Store
+Thumbs.db

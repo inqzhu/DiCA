@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WSC · DiCA</title>
+  <link rel="stylesheet" href="/static/common.css" />
+  <script src="/static/echarts.min.js"></script>
+</head>
+<body>
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="/">
+        <span class="brand-logo">
+          <img src="/static/img/logo-butterfly.png" alt="DiCA" />
+        </span>
+        <span><span class="brand-name">DiCA</span></span>
+        <span class="brand-sub">Distribution-based<br>Clustering Analysis</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="/kskc">KSKC</a>
+        <a href="/wsc" class="active">WSC</a>
+        <a href="/help">使用说明</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap" style="padding-top:28px;">
+    <div class="card-head" style="margin-bottom:6px;">
+      <span class="step">WSC</span>
+      <h2>Wasserstein 谱聚类</h2>
+    </div>
+    <p class="hint">用一维 Wasserstein 距离度量对象经验分布差异，构造相似度矩阵并稀疏化后以谱聚类划分对象（Zhu, Huang &amp; Zhang, 2025, ESWA）。</p>
+
+    <!-- 第 1 步：上传 -->
+    <div class="card">
+      <div class="card-head"><span class="step">01</span><h2>上传数据</h2></div>
+      <p class="hint">CSV 至少包含两列：<b>对象标识</b>（如商户 / 用户 ID）与<b>观测值</b>（如交易金额）。每行为一条观测记录。</p>
+      <div class="dropzone" id="dropzone">
+        <div class="dz-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>
+        </div>
+        <p>拖拽 CSV 文件到此处，或点击选择文件</p>
+        <small>支持 .csv · 上限 256 MB · <a href="/static/data/test_data.csv" download style="color:var(--primary);">下载测试数据 test_data.csv</a></small>
+      </div>
+      <input type="file" id="fileInput" accept=".csv,text/csv" />
+      <div class="file-info" id="fileInfo" style="display:none;">
+        <span class="ok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span id="fileName"></span>
+      </div>
+    </div>
+
+    <!-- 第 2 步：参数 -->
+    <div class="card" id="paramCard">
+      <div class="card-head"><span class="step">02</span><h2>聚类参数</h2></div>
+      <p class="hint">上传数据后选择对象列与观测值列；超参数已设默认值，可按需修改。</p>
+      <div class="grid">
+        <div class="field">
+          <label>对象标识列</label>
+          <select id="objName" disabled><option value="">请先上传数据</option></select>
+          <div class="desc">如商户 ID、用户 ID</div>
+        </div>
+        <div class="field">
+          <label>观测值列</label>
+          <select id="recName" disabled><option value="">请先上传数据</option></select>
+          <div class="desc">如交易金额、客单价</div>
+        </div>
+        <div class="field">
+          <label>簇数 K</label>
+          <input type="number" id="K" value="3" min="2" max="30" />
+          <div class="desc">划分的簇数量（默认 3）</div>
+        </div>
+        <div class="field">
+          <label>带宽 σ</label>
+          <input type="number" id="sigma" value="" step="0.01" min="0.001" placeholder="留空=自动" />
+          <div class="desc">高斯核带宽，留空则取距离中位数</div>
+        </div>
+        <div class="field">
+          <label>稀疏化方式</label>
+          <select id="sparsify">
+            <option value="knn" selected>K 近邻（推荐）</option>
+            <option value="lof">LOF 离群剪枝</option>
+            <option value="none">不稀疏化</option>
+          </select>
+          <div class="desc">修剪弱边，使相似度矩阵稀疏</div>
+        </div>
+        <div class="field">
+          <label>近邻数 k0</label>
+          <input type="number" id="k0" value="10" min="1" max="100" />
+          <div class="desc">每个对象保留的最近邻个数</div>
+        </div>
+      </div>
+
+      <details class="advanced">
+        <summary>高级参数</summary>
+        <div class="grid" style="margin-top:16px;">
+          <div class="field">
+            <label>LOF 近邻数</label>
+            <input type="number" id="lofNeighbors" value="20" min="2" max="200" />
+            <div class="desc">LOF 稀疏化时的近邻数</div>
+          </div>
+          <div class="field">
+            <label>LOF 离群比例</label>
+            <input type="number" id="lofContamination" value="0.1" step="0.01" min="0.01" max="0.5" />
+            <div class="desc">预期离群对象占比（0~0.5）</div>
+          </div>
+          <div class="field">
+            <label>随机种子</label>
+            <input type="number" id="randomState" value="0" min="0" max="9999" />
+            <div class="desc">谱聚类 KMeans 的随机种子</div>
+          </div>
+        </div>
+      </details>
+
+      <div class="row" style="margin-top:22px;">
+        <button class="btn" id="runBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+          运行聚类
+        </button>
+        <button class="btn secondary" id="resetBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
+          重新上传
+        </button>
+      </div>
+      <div class="progress-status" id="progressStatus">
+        <div class="head"><div class="spin-big"></div><span>正在运行聚类，请稍候…</span></div>
+        <div class="log-console" id="logConsole"></div>
+      </div>
+      <div class="error-box" id="errorBox"></div>
+    </div>
+
+    <!-- 第 3 步：结果 -->
+    <div class="card" id="resultSection">
+      <div class="result-top">
+        <div class="card-head"><span class="step">03</span><h2>聚类结果</h2></div>
+        <button class="btn ghost" id="downloadBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12"/><path d="M6 11l6 6 6-6"/><path d="M4 20h16"/></svg>
+          下载结果 CSV
+        </button>
+      </div>
+      <p class="result-summary" id="resultHint"></p>
+      <div class="stat-cards" id="statCards"></div>
+
+      <div class="section-tabs">
+        <div class="tab active" data-panel="chartPanel">分布对比</div>
+        <div class="tab" data-panel="tablePanel">分配明细</div>
+      </div>
+
+      <div class="panel active" id="chartPanel">
+        <div class="chart-type-switch">
+          <div class="ct-btn active" data-type="density">密度分布</div>
+          <div class="ct-btn" data-type="ecdf">经验累积分布</div>
+          <div class="ct-btn" data-type="hist">直方图</div>
+        </div>
+        <div id="ecdfChart"></div>
+      </div>
+      <div class="panel" id="tablePanel">
+        <div class="table-wrap" id="tableWrap"></div>
+      </div>
+    </div>
+
+    <div class="ref-card">
+      <h3>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        参考文献
+      </h3>
+      <div class="ref-item">
+        <span class="ref-no">[1]</span>
+        <span>Zhu, Y., Huang, D., &amp; Zhang, B. (2025). <span class="ref-title">A Wasserstein distance-based spectral clustering method for transaction data analysis.</span> <span class="ref-journal">Expert Systems with Applications</span>, 260, 125418. <a href="https://doi.org/10.1016/j.eswa.2024.125418" target="_blank" rel="noopener">https://doi.org/10.1016/j.eswa.2024.125418</a></span>
+      </div>
+    </div>
+
+    <footer>WSC · Wasserstein-distance-based Spectral Clustering（Zhu, Huang &amp; Zhang, 2025, ESWA）</footer>
+  </div>
+
+  <script>
+    window.APP = {
+      algo: 'wsc',
+      collectExtra: function () {
+        const sigmaVal = document.getElementById('sigma').value.trim();
+        return {
+          sigma: sigmaVal === '' ? null : parseFloat(sigmaVal),
+          sparsify: document.getElementById('sparsify').value,
+          k0: parseInt(document.getElementById('k0').value, 10),
+          lof_neighbors: parseInt(document.getElementById('lofNeighbors').value, 10),
+          lof_contamination: parseFloat(document.getElementById('lofContamination').value),
+          random_state: parseInt(document.getElementById('randomState').value, 10),
+        };
+      }
+    };
+  </script>
+  <script src="/static/app.js"></script>
+</body>
+</html>
