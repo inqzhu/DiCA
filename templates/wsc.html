@@ -31,12 +31,12 @@
       <span class="step">WSC</span>
       <h2>Wasserstein 谱聚类<span class="en">Wasserstein-distance-based Spectral Clustering</span></h2>
     </div>
-    <p class="hint">用一维 Wasserstein 距离度量对象经验分布差异，构造相似度矩阵并稀疏化后以谱聚类划分对象（Zhu, Huang &amp; Zhang, 2025, ESWA）。<span class="en">Casts clustering as graph partitioning via Wasserstein distances.</span></p>
+    <p class="hint">用一维 Wasserstein 距离度量对象经验分布差异，构造相似度矩阵并稀疏化后以谱聚类划分对象（Zhu, Huang &amp; Zhang, 2025, ESWA）。<span class="en">Reformulates clustering as graph partitioning via Wasserstein distances.</span></p>
 
     <!-- 第 1 步：上传 -->
     <div class="card">
       <div class="card-head"><span class="step">01</span><h2>上传数据<span class="en">Upload Data</span></h2></div>
-      <p class="hint">CSV 至少包含两列：<b>对象标识</b>（如商户 / 用户 ID）与<b>观测值</b>（如交易金额）。每行为一条观测记录。<span class="en">Two columns required: an object ID and a numeric observation.</span></p>
+      <p class="hint">CSV 至少包含两列：<b>对象标识</b>（如商户 / 用户 ID）与<b>观测值</b>（如交易金额）。每行为一条观测记录。<span class="en">Requires two columns: an object identifier and a numeric observation.</span></p>
       <div class="dropzone" id="dropzone">
         <div class="dz-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>

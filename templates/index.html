@@ -33,7 +33,7 @@
       <ul class="hero-points">
         <li>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>不依赖人工特征，直接利用观测值的分布信息，避免信息损失<span class="en">Works directly on distributions, avoiding information loss.</span></span>
+          <span>不依赖人工特征，直接利用观测值的分布信息，避免信息损失<span class="en">Directly based on empirical distributions, avoiding information loss.</span></span>
         </li>
         <li>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -55,7 +55,7 @@
       <span class="step">算法</span>
       <h2>选择聚类算法<span class="en">Choose an Algorithm</span></h2>
     </div>
-    <p class="hint">DiCA 内置两种基于分布差异的聚类算法，均适用于「对象 + 重复观测记录」的数据结构。<span class="en">Two distribution-based algorithms for repeated-observation data.</span></p>
+    <p class="hint">DiCA 内置两种基于分布差异的聚类算法，均适用于「对象 + 重复观测记录」的数据结构。<span class="en">Two distribution-based algorithms for data with repeated observations.</span></p>
 
     <div class="algo-cards" style="margin:0; padding:0;">
       <a class="algo-card" href="/kskc">
@@ -65,7 +65,7 @@
             <h3>Kolmogorov–Smirnov K-means 聚类</h3>
           </div>
         </div>
-        <p>用两样本 Kolmogorov–Smirnov 统计量度量对象经验分布之间的差异，在 K-means 框架下迭代划分。适合对分布整体形态差异敏感的场景。<span class="en">Partitions objects by the two-sample KS statistic.</span></p>
+        <p>用两样本 Kolmogorov–Smirnov 统计量度量对象经验分布之间的差异，在 K-means 框架下迭代划分。适合对分布整体形态差异敏感的场景。<span class="en">Clusters objects by the two-sample Kolmogorov–Smirnov statistic.</span></p>
         <div class="algo-meta">
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -90,7 +90,7 @@
             <div class="algo-en">Wasserstein-distance-based Spectral Clustering</div>
           </div>
         </div>
-        <p>用一维 Wasserstein 距离度量分布差异并构造相似度矩阵，经稀疏化后以谱聚类划分对象。将聚类转化为图割问题，善于捕捉局部分布结构。<span class="en">Casts clustering as graph partitioning via Wasserstein distances.</span></p>
+        <p>用一维 Wasserstein 距离度量分布差异并构造相似度矩阵，经稀疏化后以谱聚类划分对象。将聚类转化为图割问题，善于捕捉局部分布结构。<span class="en">Reformulates clustering as graph partitioning via Wasserstein distances.</span></p>
         <div class="algo-meta">
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
