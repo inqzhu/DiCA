@@ -1,6 +1,6 @@
 /**
  * DiCA 前端版 · 核心数值工具（零依赖）
- * 提供：基本统计、KS 距离、Wasserstein 距离、高斯核密度估计、
+ * 提供：基本统计、KS 统计量、Wasserstein 距离、高斯核密度估计、
  *       Jacobi 特征分解、KMeans、可复现随机数。
  * 浏览器（全局 Core）与 Node.js（require）均可用。
  */
@@ -77,7 +77,7 @@
 
   // ---------------- 距离 ----------------
 
-  // 两样本 KS 距离（scipy.stats.ks_2samp 的 D 统计量）
+  // 两样本 KS 统计量（scipy.stats.ks_2samp 的 D 统计量）
   function ksDistance(a, b) {
     const sa = Float64Array.from(a).sort();
     const sb = Float64Array.from(b).sort();

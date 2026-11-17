@@ -314,3 +314,14 @@ footer .sep { margin: 0 8px; color: var(--border-strong); }
 .ref-item a { color: var(--primary); text-decoration: none; }
 .ref-item a:hover { text-decoration: underline; }
 .ref-item .ref-journal { font-style: italic; }
+
+/* ===== 中英双语副标签 ===== */
+.en {
+  display: block; color: var(--muted); font-size: 12px; font-weight: 400;
+  letter-spacing: .2px; line-height: 1.5;
+}
+.en-inline { color: var(--muted); font-size: 0.85em; font-weight: 400; }
+label .en, .card-head .en { display: inline; margin-left: 6px; }
+.btn .en-inline { color: rgba(255,255,255,.75); }
+h1 .en, h2 .en { display: block; margin-top: 6px; font-size: 14px; }
+.stat-lbl .en, .desc .en { display: inline; }

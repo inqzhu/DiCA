@@ -18,7 +18,7 @@
         <span class="brand-sub">Distribution-based<br>Clustering Analysis</span>
       </a>
       <div class="nav-links">
-        <a href="index.html">首页</a>
+        <a href="index.html">首页 <span class="en-inline">Home</span></a>
         <a href="kskc.html">KSKC</a>
         <a href="wsc.html" class="active">WSC</a>
       </div>
@@ -28,19 +28,19 @@
   <div class="wrap" style="padding-top:28px;">
     <div class="card-head" style="margin-bottom:6px;">
       <span class="step">WSC</span>
-      <h2>Wasserstein 谱聚类</h2>
+      <h2>Wasserstein 谱聚类<span class="en">Wasserstein-distance-based Spectral Clustering</span></h2>
     </div>
-    <p class="hint">用一维 Wasserstein 距离度量对象经验分布差异，构造相似度矩阵并稀疏化后以谱聚类划分对象（Zhu, Huang &amp; Zhang, 2025, ESWA）。</p>
+    <p class="hint">用一维 Wasserstein 距离度量对象经验分布差异，构造相似度矩阵并稀疏化后以谱聚类划分对象（Zhu, Huang &amp; Zhang, 2025, ESWA）。<span class="en">Casts clustering as graph partitioning via Wasserstein distances.</span></p>
 
     <!-- 第 1 步：上传 -->
     <div class="card">
-      <div class="card-head"><span class="step">01</span><h2>上传数据</h2></div>
-      <p class="hint">CSV 至少包含两列：<b>对象标识</b>（如商户 / 用户 ID）与<b>观测值</b>（如交易金额）。每行为一条观测记录。数据在<b>浏览器本地处理，不会上传服务器</b>。</p>
+      <div class="card-head"><span class="step">01</span><h2>上传数据<span class="en">Upload Data</span></h2></div>
+      <p class="hint">CSV 至少包含两列：<b>对象标识</b>（如商户 / 用户 ID）与<b>观测值</b>（如交易金额）。每行为一条观测记录。数据在<b>浏览器本地处理，不会上传服务器</b>。<span class="en">Two columns required: an object ID and a numeric observation. Processed locally in your browser.</span></p>
       <div class="dropzone" id="dropzone">
         <div class="dz-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>
         </div>
-        <p>拖拽 CSV 文件到此处，或点击选择文件</p>
+        <p>拖拽 CSV 文件到此处，或点击选择文件<span class="en">Drag &amp; drop a CSV, or click to browse</span></p>
         <small>支持 .csv · <a href="data/test_data.csv" download style="color:var(--primary);">下载测试数据 test_data.csv</a></small>
       </div>
       <input type="file" id="fileInput" accept=".csv,text/csv" />
@@ -52,31 +52,31 @@
 
     <!-- 第 2 步：参数 -->
     <div class="card" id="paramCard">
-      <div class="card-head"><span class="step">02</span><h2>聚类参数</h2></div>
-      <p class="hint">上传数据后选择对象列与观测值列；超参数已设默认值，可按需修改。</p>
+      <div class="card-head"><span class="step">02</span><h2>聚类参数<span class="en">Parameters</span></h2></div>
+      <p class="hint">上传数据后选择对象列与观测值列；超参数已设默认值，可按需修改。<span class="en">Pick the object and observation columns, then tune hyperparameters.</span></p>
       <div class="grid">
         <div class="field">
-          <label>对象标识列</label>
+          <label>对象标识列 <span class="en-inline">Object ID column</span></label>
           <select id="objName" disabled><option value="">请先上传数据</option></select>
           <div class="desc">如商户 ID、用户 ID</div>
         </div>
         <div class="field">
-          <label>观测值列</label>
+          <label>观测值列 <span class="en-inline">Observation column</span></label>
           <select id="recName" disabled><option value="">请先上传数据</option></select>
           <div class="desc">如交易金额、客单价</div>
         </div>
         <div class="field">
-          <label>簇数 K</label>
+          <label>簇数 K <span class="en-inline">Number of clusters</span></label>
           <input type="number" id="K" value="3" min="2" max="30" />
           <div class="desc">划分的簇数量（默认 3）</div>
         </div>
         <div class="field">
-          <label>带宽 σ</label>
+          <label>带宽 σ <span class="en-inline">Bandwidth σ</span></label>
           <input type="number" id="sigma" value="" step="0.01" min="0.001" placeholder="留空=自动" />
           <div class="desc">高斯核带宽，留空则取距离中位数</div>
         </div>
         <div class="field">
-          <label>稀疏化方式</label>
+          <label>稀疏化方式 <span class="en-inline">Sparsification</span></label>
           <select id="sparsify">
             <option value="knn" selected>K 近邻（推荐）</option>
             <option value="lof">LOF 离群剪枝</option>
@@ -85,27 +85,27 @@
           <div class="desc">修剪弱边，使相似度矩阵稀疏</div>
         </div>
         <div class="field">
-          <label>近邻数 k0</label>
+          <label>近邻数 k0 <span class="en-inline">Neighbors k0</span></label>
           <input type="number" id="k0" value="10" min="1" max="100" />
           <div class="desc">每个对象保留的最近邻个数</div>
         </div>
       </div>
 
       <details class="advanced">
-        <summary>高级参数</summary>
+        <summary>高级参数 <span class="en-inline">Advanced</span></summary>
         <div class="grid" style="margin-top:16px;">
           <div class="field">
-            <label>LOF 近邻数</label>
+            <label>LOF 近邻数 <span class="en-inline">LOF neighbors</span></label>
             <input type="number" id="lofNeighbors" value="20" min="2" max="200" />
             <div class="desc">LOF 稀疏化时的近邻数</div>
           </div>
           <div class="field">
-            <label>LOF 离群比例</label>
+            <label>LOF 离群比例 <span class="en-inline">LOF contamination</span></label>
             <input type="number" id="lofContamination" value="0.1" step="0.01" min="0.01" max="0.5" />
             <div class="desc">预期离群对象占比（0~0.5）</div>
           </div>
           <div class="field">
-            <label>随机种子</label>
+            <label>随机种子 <span class="en-inline">Random seed</span></label>
             <input type="number" id="randomState" value="0" min="0" max="9999" />
             <div class="desc">谱聚类 KMeans 的随机种子</div>
           </div>
@@ -115,11 +115,11 @@
       <div class="row" style="margin-top:22px;">
         <button class="btn" id="runBtn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
-          运行聚类
+          运行聚类 <span class="en-inline">Run</span>
         </button>
         <button class="btn secondary" id="resetBtn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
-          重新上传
+          重新上传 <span class="en-inline">Reset</span>
         </button>
       </div>
       <div class="progress-status" id="progressStatus">
@@ -132,25 +132,25 @@
     <!-- 第 3 步：结果 -->
     <div class="card" id="resultSection">
       <div class="result-top">
-        <div class="card-head"><span class="step">03</span><h2>聚类结果</h2></div>
+        <div class="card-head"><span class="step">03</span><h2>聚类结果<span class="en">Results</span></h2></div>
         <button class="btn ghost" id="downloadBtn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12"/><path d="M6 11l6 6 6-6"/><path d="M4 20h16"/></svg>
-          下载结果 CSV
+          下载结果 CSV <span class="en-inline">Download CSV</span>
         </button>
       </div>
       <p class="result-summary" id="resultHint"></p>
       <div class="stat-cards" id="statCards"></div>
 
       <div class="section-tabs">
-        <div class="tab active" data-panel="chartPanel">分布对比</div>
-        <div class="tab" data-panel="tablePanel">分配明细</div>
+        <div class="tab active" data-panel="chartPanel">分布对比 <span class="en-inline">Distributions</span></div>
+        <div class="tab" data-panel="tablePanel">分配明细 <span class="en-inline">Assignments</span></div>
       </div>
 
       <div class="panel active" id="chartPanel">
         <div class="chart-type-switch">
-          <div class="ct-btn active" data-type="density">密度分布</div>
-          <div class="ct-btn" data-type="ecdf">经验累积分布</div>
-          <div class="ct-btn" data-type="hist">直方图</div>
+          <div class="ct-btn active" data-type="density">密度分布 <span class="en-inline">Density</span></div>
+          <div class="ct-btn" data-type="ecdf">经验累积分布 <span class="en-inline">ECDF</span></div>
+          <div class="ct-btn" data-type="hist">直方图 <span class="en-inline">Histogram</span></div>
         </div>
         <div id="ecdfChart"></div>
       </div>
@@ -162,7 +162,7 @@
     <div class="ref-card">
       <h3>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        参考文献
+        参考文献 <span class="en-inline">References</span>
       </h3>
       <div class="ref-item">
         <span class="ref-no">[1]</span>
