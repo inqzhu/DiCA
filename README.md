@@ -91,8 +91,8 @@ python app.py
 
 ## 算法说明
 
-**KSKC**（KS 距离 K-means）：
-1. 用两样本 Kolmogorov–Smirnov 距离度量对象经验分布之间的差异；
+**KSKC**（Kolmogorov–Smirnov K-means 聚类）：
+1. 用两样本 Kolmogorov–Smirnov 统计量度量对象经验分布之间的差异；
 2. 在 K-means 框架下迭代划分对象，直至收敛。
 
 **WSC**（Wasserstein 谱聚类）：

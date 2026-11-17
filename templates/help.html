@@ -176,6 +176,14 @@
     .ref-item a { color: var(--primary); text-decoration: none; }
     .ref-item a:hover { text-decoration: underline; }
     .ref-item .ref-journal { font-style: italic; }
+
+    /* ===== 中英双语副标签 ===== */
+    .en {
+      display: block; color: var(--muted); font-size: 12px; font-weight: 400;
+      letter-spacing: .2px; line-height: 1.5;
+    }
+    .en-inline { color: var(--muted); font-size: 0.85em; font-weight: 400; }
+    h1 .en, h2 .en { display: block; margin-top: 6px; font-size: 14px; }
   </style>
 </head>
 <body>
@@ -189,22 +197,22 @@
         <span class="brand-sub">Distribution-based<br>Clustering Analysis</span>
       </a>
       <div class="nav-links">
-        <a href="/">首页</a>
+        <a href="/">首页 <span class="en-inline">Home</span></a>
         <a href="/kskc">KSKC</a>
         <a href="/wsc">WSC</a>
-        <a href="/help" class="active">使用说明</a>
+        <a href="/help" class="active">使用说明 <span class="en-inline">Help</span></a>
       </div>
     </div>
   </nav>
 
   <div class="wrap">
     <div class="doc-head">
-      <h1>使用说明</h1>
+      <h1>使用说明<span class="en">User Guide</span></h1>
       <p>选择聚类算法 → 上传数据 → 设置参数 → 查看结果，三步完成一次基于分布的聚类分析</p>
     </div>
 
     <div class="toc">
-      <h3>目录</h3>
+      <h3>目录 <span class="en-inline">Contents</span></h3>
       <ol>
         <li><a href="#s0">选择聚类算法（KSKC / WSC）</a></li>
         <li><a href="#s1">准备数据：CSV 格式要求</a></li>
@@ -220,11 +228,11 @@
     <div class="section" id="s0">
       <div class="section-head">
         <span class="step-badge">开始</span>
-        <h2>选择聚类算法</h2>
+        <h2>选择聚类算法<span class="en">Choose an Algorithm</span></h2>
       </div>
       <p>首页提供两种基于分布差异的聚类算法，均适用于「对象 + 重复观测记录」的数据结构，可从首页点击进入：</p>
       <ul>
-        <li><b>KSKC（KS 距离 K-means）</b>：用两样本 Kolmogorov–Smirnov 距离度量分布差异，在 K-means 框架下迭代划分，对分布整体形态差异敏感；</li>
+        <li><b>KSKC（Kolmogorov–Smirnov K-means 聚类）</b>：用两样本 Kolmogorov–Smirnov 统计量度量分布差异，在 K-means 框架下迭代划分，对分布整体形态差异敏感；</li>
         <li><b>WSC（Wasserstein 谱聚类）</b>：用一维 Wasserstein 距离度量分布差异，构造相似度矩阵并稀疏化后以谱聚类划分，善于捕捉局部分布结构，计算更快。</li>
       </ul>
       <p>两个应用的页面结构与操作流程一致，仅参数项不同。</p>
@@ -234,7 +242,7 @@
     <div class="section" id="s1">
       <div class="section-head">
         <span class="step-badge">准备</span>
-        <h2>准备数据：CSV 格式要求</h2>
+        <h2>准备数据：CSV 格式要求<span class="en">Prepare Data: CSV Format</span></h2>
       </div>
       <p>DiCA 适用于<b>对象具有多条重复观测记录</b>的场景（如商户的多笔交易、用户的多次消费）。输入为标准 CSV 文件，至少包含两列：</p>
       <ul>
@@ -262,7 +270,7 @@
     <div class="section" id="s2">
       <div class="section-head">
         <span class="step-badge">01</span>
-        <h2>第一步：上传数据文件</h2>
+        <h2>第一步：上传数据文件<span class="en">Step 1: Upload Your Data</span></h2>
       </div>
       <p>进入任一算法应用后，在「上传数据」区域<b>点击虚线框选择文件</b>，或将 CSV 文件<b>直接拖拽</b>到框内。也可点击虚线框下方的<b>「下载测试数据」</b>先获取示例文件：</p>
       <div class="shot"><img src="/static/img/home.png" alt="上传数据界面"></div>
@@ -276,7 +284,7 @@
     <div class="section" id="s3">
       <div class="section-head">
         <span class="step-badge">02</span>
-        <h2>第二步：设置聚类参数并运行</h2>
+        <h2>第二步：设置聚类参数并运行<span class="en">Step 2: Set Parameters &amp; Run</span></h2>
       </div>
       <p>上传完成后，「聚类参数」卡片中的对象列与观测值列会被<b>自动识别</b>（也可手动更换）。两个算法共有的核心参数：</p>
       <ul>
@@ -299,7 +307,7 @@
     <div class="section" id="s4">
       <div class="section-head">
         <span class="step-badge">03</span>
-        <h2>第三步：查看聚类结果</h2>
+        <h2>第三步：查看聚类结果<span class="en">Step 3: Explore Results</span></h2>
       </div>
       <p>聚类完成后，页面展示三部分结果：</p>
       <ul>
@@ -326,7 +334,7 @@
     <div class="section" id="s5">
       <div class="section-head">
         <span class="step-badge">04</span>
-        <h2>下载聚类结果</h2>
+        <h2>下载聚类结果<span class="en">Download Results</span></h2>
       </div>
       <p>结果区右上角的<b>「下载结果 CSV」</b>按钮，可将聚类划分结果保存为新的 CSV 文件（两列：对象标识 + 簇标签），方便后续在 Excel、Python 等工具中做进一步分析或与业务标签比对：</p>
       <div class="shot"><img src="/static/img/download.png" alt="下载结果"></div>
@@ -337,7 +345,7 @@
     <div class="section" id="s6">
       <div class="section-head">
         <span class="step-badge">FAQ</span>
-        <h2>常见问题</h2>
+        <h2>常见问题<span class="en">FAQ</span></h2>
       </div>
       <p><b>Q：KSKC 和 WSC 该怎么选？</b><br>A：两者都是基于分布差异的聚类。KSKC 是迭代式方法，对分布整体形态敏感；WSC 把聚类转化为图割问题，计算更快（数百个对象通常几秒完成）。建议都跑一遍对比结果。</p>
       <p><b>Q：聚类需要多长时间？</b><br>A：取决于对象数与记录数。WSC 通常数秒完成；KSKC 数据量大时可能需数分钟，运行期间可看实时日志。</p>

@@ -1,7 +1,7 @@
 /**
  * DiCA 前端版 · KSKC 算法（Kolmogorov-Smirnov K-means）
- * 步骤：初始簇中心选择（最远距离）→ 迭代（E-step 簇分布 / M-step KS 距离分配）。
- * 复现 ks_multi.py，多进程改为单线程，预排序优化 KS 距离。
+ * 步骤：初始簇中心选择（最远距离）→ 迭代（E-step 簇分布 / M-step KS 统计量分配）。
+ * 复现 ks_multi.py，多进程改为单线程，预排序优化 KS 统计量。
  */
 (function (global) {
   'use strict';
@@ -9,7 +9,7 @@
     ? require('./core.js')
     : global.Core;
 
-  // 已排序两样本的 KS 距离（可选度数校正）
+  // 已排序两样本的 KS 统计量（可选度数校正）
   function ksDistanceSorted(sa, sb, isCorrected) {
     const na = sa.length, nb = sb.length;
     if (na === 0 || nb === 0) return 1;
@@ -59,7 +59,7 @@
     const sortedVals = new Array(n);
     for (let i = 0; i < n; i++) sortedVals[i] = Float64Array.from(transDic[mids[i]]).sort();
 
-    // 初始簇中心：随机选 1 个，其余用最大最小 KS 距离
+    // 初始簇中心：随机选 1 个，其余用最大最小 KS 统计量
     const rng = Core.mulberry32(opts.randomSeed || 0);
     let cSamples = [];
     for (let k = 0; k < K; k++) cSamples.push([]);

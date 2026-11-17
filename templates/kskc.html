@@ -18,10 +18,10 @@
         <span class="brand-sub">Distribution-based<br>Clustering Analysis</span>
       </a>
       <div class="nav-links">
-        <a href="/">首页</a>
+        <a href="/">首页 <span class="en-inline">Home</span></a>
         <a href="/kskc" class="active">KSKC</a>
         <a href="/wsc">WSC</a>
-        <a href="/help">使用说明</a>
+        <a href="/help">使用说明 <span class="en-inline">Help</span></a>
       </div>
     </div>
   </nav>
@@ -29,19 +29,19 @@
   <div class="wrap" style="padding-top:28px;">
     <div class="card-head" style="margin-bottom:6px;">
       <span class="step">KSKC</span>
-      <h2>KS 距离 K-means 聚类</h2>
+      <h2>Kolmogorov–Smirnov K-means 聚类<span class="en">Kolmogorov–Smirnov K-means Clustering</span></h2>
     </div>
-    <p class="hint">用两样本 Kolmogorov–Smirnov 距离度量对象经验分布差异，在 K-means 框架下迭代聚类（Zhu et al., 2021, JRSS-C）。</p>
+    <p class="hint">用两样本 Kolmogorov–Smirnov 统计量度量对象经验分布差异，在 K-means 框架下迭代聚类（Zhu et al., 2021, JRSS-C）。<span class="en">Partitions objects by the two-sample KS statistic within a K-means framework.</span></p>
 
     <!-- 第 1 步：上传 -->
     <div class="card">
-      <div class="card-head"><span class="step">01</span><h2>上传数据</h2></div>
-      <p class="hint">CSV 至少包含两列：<b>对象标识</b>（如商户 / 用户 ID）与<b>观测值</b>（如交易金额）。每行为一条观测记录。</p>
+      <div class="card-head"><span class="step">01</span><h2>上传数据<span class="en">Upload Data</span></h2></div>
+      <p class="hint">CSV 至少包含两列：<b>对象标识</b>（如商户 / 用户 ID）与<b>观测值</b>（如交易金额）。每行为一条观测记录。<span class="en">Two columns required: an object ID and a numeric observation.</span></p>
       <div class="dropzone" id="dropzone">
         <div class="dz-icon">
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4"/><path d="M6 10l6-6 6 6"/><path d="M4 20h16"/></svg>
         </div>
-        <p>拖拽 CSV 文件到此处，或点击选择文件</p>
+        <p>拖拽 CSV 文件到此处，或点击选择文件<span class="en">Drag &amp; drop a CSV, or click to browse</span></p>
         <small>支持 .csv · 上限 256 MB · <a href="/static/data/test_data.csv" download style="color:var(--primary);">下载测试数据 test_data.csv</a></small>
       </div>
       <input type="file" id="fileInput" accept=".csv,text/csv" />
@@ -53,52 +53,52 @@
 
     <!-- 第 2 步：参数 -->
     <div class="card" id="paramCard">
-      <div class="card-head"><span class="step">02</span><h2>聚类参数</h2></div>
-      <p class="hint">上传数据后选择对象列与观测值列；超参数已设默认值，可按需修改。</p>
+      <div class="card-head"><span class="step">02</span><h2>聚类参数<span class="en">Parameters</span></h2></div>
+      <p class="hint">上传数据后选择对象列与观测值列；超参数已设默认值，可按需修改。<span class="en">Pick the object and observation columns, then tune hyperparameters.</span></p>
       <div class="grid">
         <div class="field">
-          <label>对象标识列</label>
+          <label>对象标识列 <span class="en-inline">Object ID column</span></label>
           <select id="objName" disabled><option value="">请先上传数据</option></select>
           <div class="desc">如商户 ID、用户 ID</div>
         </div>
         <div class="field">
-          <label>观测值列</label>
+          <label>观测值列 <span class="en-inline">Observation column</span></label>
           <select id="recName" disabled><option value="">请先上传数据</option></select>
           <div class="desc">如交易金额、客单价</div>
         </div>
         <div class="field">
-          <label>簇数 K</label>
+          <label>簇数 K <span class="en-inline">Number of clusters</span></label>
           <input type="number" id="K" value="3" min="2" max="30" />
           <div class="desc">划分的簇数量（默认 3）</div>
         </div>
         <div class="field">
-          <label>并行线程数</label>
+          <label>并行线程数 <span class="en-inline">Threads</span></label>
           <input type="number" id="numThread" value="4" min="1" max="16" />
           <div class="desc">多进程加速计算（默认 4）</div>
         </div>
         <div class="field">
-          <label>度数校正</label>
+          <label>度数校正 <span class="en-inline">Degree correction</span></label>
           <select id="isCorrected">
             <option value="0" selected>否（默认）</option>
             <option value="1">是</option>
           </select>
-          <div class="desc">对样本量差异做距离校正</div>
+          <div class="desc">对样本量差异做校正</div>
         </div>
       </div>
 
       <details class="advanced">
-        <summary>高级参数</summary>
+        <summary>高级参数 <span class="en-inline">Advanced</span></summary>
         <div class="grid" style="margin-top:16px;">
           <div class="field">
-            <label>最大迭代次数</label>
+            <label>最大迭代次数 <span class="en-inline">Max iterations</span></label>
             <input type="number" id="niter" value="30" min="1" max="200" />
           </div>
           <div class="field">
-            <label>快速模式采样数</label>
+            <label>快速模式采样数 <span class="en-inline">Fast-mode sample size</span></label>
             <input type="number" id="sampleNum" value="1000" min="100" max="100000" />
           </div>
           <div class="field">
-            <label>快速模式</label>
+            <label>快速模式 <span class="en-inline">Fast mode</span></label>
             <select id="isFast">
               <option value="1">开启（推荐）</option>
               <option value="0">关闭</option>
@@ -110,11 +110,11 @@
       <div class="row" style="margin-top:22px;">
         <button class="btn" id="runBtn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
-          运行聚类
+          运行聚类 <span class="en-inline">Run</span>
         </button>
         <button class="btn secondary" id="resetBtn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg>
-          重新上传
+          重新上传 <span class="en-inline">Reset</span>
         </button>
       </div>
       <div class="progress-status" id="progressStatus">
@@ -127,25 +127,25 @@
     <!-- 第 3 步：结果 -->
     <div class="card" id="resultSection">
       <div class="result-top">
-        <div class="card-head"><span class="step">03</span><h2>聚类结果</h2></div>
+        <div class="card-head"><span class="step">03</span><h2>聚类结果<span class="en">Results</span></h2></div>
         <button class="btn ghost" id="downloadBtn">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12"/><path d="M6 11l6 6 6-6"/><path d="M4 20h16"/></svg>
-          下载结果 CSV
+          下载结果 CSV <span class="en-inline">Download CSV</span>
         </button>
       </div>
       <p class="result-summary" id="resultHint"></p>
       <div class="stat-cards" id="statCards"></div>
 
       <div class="section-tabs">
-        <div class="tab active" data-panel="chartPanel">分布对比</div>
-        <div class="tab" data-panel="tablePanel">分配明细</div>
+        <div class="tab active" data-panel="chartPanel">分布对比 <span class="en-inline">Distributions</span></div>
+        <div class="tab" data-panel="tablePanel">分配明细 <span class="en-inline">Assignments</span></div>
       </div>
 
       <div class="panel active" id="chartPanel">
         <div class="chart-type-switch">
-          <div class="ct-btn active" data-type="density">密度分布</div>
-          <div class="ct-btn" data-type="ecdf">经验累积分布</div>
-          <div class="ct-btn" data-type="hist">直方图</div>
+          <div class="ct-btn active" data-type="density">密度分布 <span class="en-inline">Density</span></div>
+          <div class="ct-btn" data-type="ecdf">经验累积分布 <span class="en-inline">ECDF</span></div>
+          <div class="ct-btn" data-type="hist">直方图 <span class="en-inline">Histogram</span></div>
         </div>
         <div id="ecdfChart"></div>
       </div>
@@ -157,7 +157,7 @@
     <div class="ref-card">
       <h3>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        参考文献
+        参考文献 <span class="en-inline">References</span>
       </h3>
       <div class="ref-item">
         <span class="ref-no">[1]</span>

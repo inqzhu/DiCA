@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DiCA · 基于分布的聚类分析平台</title>
+  <title>DiCA · 基于分布的聚类分析平台 | Distribution-based Clustering Analysis</title>
   <link rel="stylesheet" href="/static/common.css" />
 </head>
 <body>
@@ -17,10 +17,10 @@
         <span class="brand-sub">Distribution-based<br>Clustering Analysis</span>
       </a>
       <div class="nav-links">
-        <a href="/" class="active">首页</a>
+        <a href="/" class="active">首页 <span class="en-inline">Home</span></a>
         <a href="/kskc">KSKC</a>
         <a href="/wsc">WSC</a>
-        <a href="/help">使用说明</a>
+        <a href="/help">使用说明 <span class="en-inline">Help</span></a>
       </div>
     </div>
   </nav>
@@ -28,45 +28,44 @@
   <div class="hero">
     <div class="hero-copy">
       <span class="tag">Distribution-based Clustering</span>
-      <h1>从交易流水到行为分群</h1>
-      <p>DiCA 是一个<b>基于分布差异</b>的聚类分析平台。它不依赖人工构造的特征，而是把每个对象（商户 / 用户）的大量重复观测记录提炼为<b>经验分布</b>，再依据分布之间的差异将对象聚成若干行为相似的簇，从而在数据层面还原出不同的消费行为模式。</p>
+      <h1>从流水记录到行为分群<span class="en">From Records to Behavioral Segments</span></h1>
+      <p>DiCA 是一个<b>基于分布差异</b>的聚类分析平台。它不依赖人工构造的特征，而是把每个对象（商户 / 用户）的大量重复观测记录提炼为<b>经验分布</b>，再依据分布之间的差异将对象聚成若干行为相似的簇，从而在数据层面还原出不同的行为模式。<span class="en">Clustering objects by their empirical distributions — no handcrafted features required.</span></p>
       <ul class="hero-points">
         <li>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>不依赖人工特征，直接利用观测值的分布信息，避免信息损失</span>
+          <span>不依赖人工特征，直接利用观测值的分布信息，避免信息损失<span class="en">Works directly on distributions, avoiding information loss.</span></span>
         </li>
         <li>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>以分布间的统计距离度量差异，聚类结果可解释、有理论支撑</span>
+          <span>以分布间的统计度量刻画差异，聚类结果可解释、有理论支撑<span class="en">Statistically grounded and interpretable.</span></span>
         </li>
         <li>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-          <span>上传 CSV 即可完成聚类，自动输出分布对比图与簇标签</span>
+          <span>上传 CSV 即可完成聚类，自动输出分布对比图与簇标签<span class="en">Upload a CSV to cluster and visualize distributions.</span></span>
         </li>
       </ul>
     </div>
     <div class="hero-art">
-      <img src="/static/img/concept-3d.png" alt="从交易流水到经验分布再到行为分群" />
+      <img src="/static/img/concept-3d.png" alt="从流水记录到经验分布再到行为分群" />
     </div>
   </div>
 
   <div class="wrap" style="padding-top:24px;">
     <div class="card-head" style="margin-bottom:16px;">
       <span class="step">算法</span>
-      <h2>选择聚类算法</h2>
+      <h2>选择聚类算法<span class="en">Choose an Algorithm</span></h2>
     </div>
-    <p class="hint">DiCA 内置两种基于分布差异的聚类算法，均适用于「对象 + 重复观测记录」的数据结构。</p>
+    <p class="hint">DiCA 内置两种基于分布差异的聚类算法，均适用于「对象 + 重复观测记录」的数据结构。<span class="en">Two distribution-based algorithms for repeated-observation data.</span></p>
 
     <div class="algo-cards" style="margin:0; padding:0;">
       <a class="algo-card" href="/kskc">
         <div class="algo-head">
           <div class="algo-badge">KSKC</div>
           <div>
-            <h3>KS 距离 K-means</h3>
-            <div class="algo-en">Kolmogorov–Smirnov K-means Clustering</div>
+            <h3>Kolmogorov–Smirnov K-means 聚类</h3>
           </div>
         </div>
-        <p>用两样本 Kolmogorov–Smirnov 距离度量对象经验分布之间的差异，在 K-means 框架下迭代划分。适合对分布整体形态差异敏感的场景。</p>
+        <p>用两样本 Kolmogorov–Smirnov 统计量度量对象经验分布之间的差异，在 K-means 框架下迭代划分。适合对分布整体形态差异敏感的场景。<span class="en">Partitions objects by the two-sample KS statistic.</span></p>
         <div class="algo-meta">
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -78,7 +77,7 @@
           </span>
         </div>
         <span class="algo-cta">
-          进入 KSKC 应用
+          进入 KSKC 应用 <span class="en-inline">Open KSKC</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
         </span>
       </a>
@@ -91,7 +90,7 @@
             <div class="algo-en">Wasserstein-distance-based Spectral Clustering</div>
           </div>
         </div>
-        <p>用一维 Wasserstein 距离度量分布差异并构造相似度矩阵，经稀疏化后以谱聚类划分对象。将聚类转化为图割问题，善于捕捉局部分布结构。</p>
+        <p>用一维 Wasserstein 距离度量分布差异并构造相似度矩阵，经稀疏化后以谱聚类划分对象。将聚类转化为图割问题，善于捕捉局部分布结构。<span class="en">Casts clustering as graph partitioning via Wasserstein distances.</span></p>
         <div class="algo-meta">
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -103,7 +102,7 @@
           </span>
         </div>
         <span class="algo-cta">
-          进入 WSC 应用
+          进入 WSC 应用 <span class="en-inline">Open WSC</span>
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
         </span>
       </a>
@@ -112,7 +111,7 @@
     <div class="ref-card">
       <h3>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        参考文献
+        参考文献 <span class="en-inline">References</span>
       </h3>
       <div class="ref-item">
         <span class="ref-no">[1]</span>
@@ -124,7 +123,7 @@
       </div>
     </div>
 
-    <footer>DiCA · 基于分布的聚类分析平台</footer>
+    <footer>DiCA · 基于分布的聚类分析平台 <span class="en-inline">Distribution-based Clustering Analysis</span></footer>
   </div>
 </body>
 </html>

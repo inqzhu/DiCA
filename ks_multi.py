@@ -35,7 +35,7 @@ class KSKC(object):
     # number of iterations
     niter = 30
 
-    # calculate K-S distance
+    # calculate the K-S statistic (two-sample Kolmogorov–Smirnov D)
     def ks_dis(self, a, b):
         [d, s] = ss.ks_2samp(a, b)
 
@@ -87,7 +87,7 @@ class KSKC(object):
                 if temp_ks < min_dis or min_dis < 0:
                     min_dis = temp_ks
                     opt_c = j
-            # assign this point to the cluster with the smallest K-S distance
+            # assign this point to the cluster with the smallest K-S statistic
             c_samples[opt_c].append(mids[i])
             s_samples[opt_c].append(min_dis)
 
